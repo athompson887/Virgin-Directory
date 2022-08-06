@@ -3,16 +3,16 @@ package com.athompson.virgin
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.athompson.virgin.data.Person
+import com.athompson.virgin.data.Room
 import com.athompson.virgin.databinding.AdapterRoomBinding
 import javax.inject.Inject
 
 class RoomAdapter @Inject constructor() : RecyclerView.Adapter<RoomViewHolder>() {
 
-    var personList = mutableListOf<Person>()
+    var roomList = mutableListOf<Room>()
 
-    fun setRooms(movies: List<Person>) {
-        this.personList = movies.toMutableList()
+    fun setRooms(rooms: List<Room>) {
+        this.roomList = rooms.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -25,12 +25,12 @@ class RoomAdapter @Inject constructor() : RecyclerView.Adapter<RoomViewHolder>()
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
 
-        val person = personList[position]
-        holder.binding.name.text = person.firstName
+        val room = roomList[position]
+        holder.binding.name.text = room.id
     }
 
     override fun getItemCount(): Int {
-        return personList.size
+        return roomList.size
     }
 }
 

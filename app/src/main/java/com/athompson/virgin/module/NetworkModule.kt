@@ -1,6 +1,7 @@
 package com.athompson.virgin.module
 
 import com.athompson.virgin.data.ApiService
+import com.athompson.virgin.getURL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,7 +36,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://howtodoandroid.com/")
+            .baseUrl(getURL())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

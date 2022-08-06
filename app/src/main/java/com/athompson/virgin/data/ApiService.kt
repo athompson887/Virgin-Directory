@@ -5,8 +5,8 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @GET("movielist.json")
+    @GET("people")
     suspend fun getAllPeople() : Response<List<Person>>
-    @GET("movielist.json")
+    @GET("rooms")
     suspend fun getAllRooms() : Response<List<Room>>
 }

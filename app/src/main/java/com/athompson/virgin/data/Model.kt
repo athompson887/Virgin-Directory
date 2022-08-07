@@ -7,11 +7,24 @@ data class Room(
     val id:String)
 
 data class Person(
-    val createdAt: String,
-    val firstName: String,
     val avatar: String,
-    val lastName: String,
+    val createdAt: String,
+    val `data`: Data,
     val email: String,
-    val jobtitle: String,
     val favouriteColor: String,
-    val id:String)
+    val firstName: String,
+    val fromName: String,
+    val id: String,
+    val jobtitle: String,
+    val lastName: String,
+    val to: String
+)
+
+data class Data(
+    val body: String,
+    val fromId: String,
+    val id: String,
+    val meetingid: String,
+    val title: String,
+    val toId: String
+)

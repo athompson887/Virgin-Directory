@@ -4,6 +4,8 @@ import com.athompson.virgin.networking.networkModule
 import com.athompson.virgin.preferences.prefModule
 import com.athompson.virgin.repository.peopleRepoModule
 import com.athompson.virgin.repository.roomRepoModule
+import com.athompson.virgin.ui.people.detail.personDetailFragmentModule
+import com.athompson.virgin.ui.people.detail.viewModelPersonModule
 import com.athompson.virgin.ui.people.peopleFragmentModule
 import com.athompson.virgin.ui.people.viewModelPeopleModule
 import com.athompson.virgin.ui.rooms.roomFragmentModule
@@ -20,9 +22,9 @@ class VirginDirectoryApplication : Application() {
             androidLogger(Level.ERROR)
             androidContext(this@VirginDirectoryApplication)
             modules(listOf(prefModule, networkModule,
-                roomFragmentModule, peopleFragmentModule,
+                roomFragmentModule, peopleFragmentModule,viewModelPersonModule,
                 viewModelRoomModule, viewModelPeopleModule,
-                peopleRepoModule, roomRepoModule
+                peopleRepoModule, roomRepoModule, personDetailFragmentModule
             ))
         }
     }

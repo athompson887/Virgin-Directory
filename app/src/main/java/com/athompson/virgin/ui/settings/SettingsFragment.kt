@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
 import com.athompson.virgin.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -26,7 +28,7 @@ class SettingsFragment : Fragment() {
             ViewModelProvider(
                 this,
                 ViewModelProvider.NewInstanceFactory()
-            ).get(SettingsViewModel::class.java)
+            )[SettingsViewModel::class.java]
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -35,6 +37,7 @@ class SettingsFragment : Fragment() {
         settingsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
         return root
     }
 

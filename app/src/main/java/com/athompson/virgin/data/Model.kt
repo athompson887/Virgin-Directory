@@ -1,24 +1,11 @@
 package com.athompson.virgin.data
 
-import com.google.gson.annotations.SerializedName
 
 data class Room(
     val createdAt: String,
     val isOccupied: Boolean,
     val maxOccupancy: Int,
     val id:String)
-
-data class Weather(
-    @SerializedName("main") val temp: TempData,
-    val name: String
-)
-
-
-data class TempData(
-    val temp: Double,
-    val humidity: Int
-)
-
 
 data class Person(
     val avatar: String,

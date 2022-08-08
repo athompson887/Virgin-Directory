@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.athompson.virgin.data.Person
 import com.athompson.virgin.networking.Resource
 import com.athompson.virgin.repository.PeopleRepository
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,6 @@ val viewModelPeopleModule = module {
 class PeopleViewModel(
     private val peopleRepository: PeopleRepository
 ) : ViewModel() {
-
     var people =
         liveData(Dispatchers.IO) {
             emit(Resource.loading(null))

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.athompson.virgin.R
+import com.athompson.virgin.data.Data
 import com.athompson.virgin.data.Person
 import com.athompson.virgin.databinding.FragmentPeopleBinding
 import com.athompson.virgin.databinding.FragmentPersonDetailBinding
@@ -55,9 +56,19 @@ class PersonDetailFragment : Fragment() {
     }
 
     private fun initialiseObservers() {
-        binding.text
+        binding.avatar.text = sharedPerson?.avatar?:""
+        binding.createdAt.text = sharedPerson?.createdAt?:""
+        binding.email.text = sharedPerson?.email?:""
+        binding.favouriteColor.text = sharedPerson?.favouriteColor?:""
+        binding.firstName.text = sharedPerson?.firstName?:""
+        binding.lastName.text = sharedPerson?.lastName?:""
+        binding.fromName.text = sharedPerson?.fromName?:""
+        binding.id.text = sharedPerson?.id?:""
+        binding.jobtitle.text = sharedPerson?.jobtitle?:""
+        binding.to.text = sharedPerson?.to?:""
+
         personDetailViewModel.text.observe(viewLifecycleOwner) {
-            binding.text.text = sharedPerson?.firstName?:""
+
         }
     }
 }

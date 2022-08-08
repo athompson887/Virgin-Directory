@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.athompson.virgin.R
 import com.athompson.virgin.data.Room
 import com.athompson.virgin.databinding.RoomItemBinding
+import com.athompson.virgin.formatDateString
 
 class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.ViewHolder>() {
     private var data = mutableListOf<Room?>()
@@ -18,13 +19,31 @@ class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.ViewHolder>() {
         return ViewHolder(v)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val room = data[position]
-
-        holder.itemView.setOnClickListener {
-
+        val createdAt = room?.createdAt
+        holder.binding.createdAt.text = ""
+        if(createdAt!=null) {
+            val dateStr = formatDateString(room.createdAt)
+            if (dateStr.isNotEmpty()) {
+                holder.binding.createdAt.text = "Created : $dateStr"
+            } else {
+                holder.binding.createdAt.text = ""
+            }
         }
-        holder.binding.roomText.text = room?.createdAt
+
+        holder.binding.id.text = "ID ${room?.id}"
+       if(room?.isOccupied==true) {
+           holder.binding.availableIcon.setImageResource(R.drawable.ic_baseline_no_meeting_room_24)
+           holder.binding.isOccupied.text = "Room is occupied"
+           holder.binding.bookButton.visibility = View.INVISIBLE
+        } else {
+           holder.binding.availableIcon.setImageResource(R.drawable.ic_baseline_meeting_room_24)
+           holder.binding.isOccupied.text = "Room is available"
+           holder.binding.bookButton.visibility = View.VISIBLE
+        }
+        holder.binding.maxOccupancy.text = "Max Ooccupancy ${room?.maxOccupancy}"
     }
 
     @SuppressLint("NotifyDataSetChanged")

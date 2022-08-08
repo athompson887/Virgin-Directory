@@ -20,6 +20,7 @@ import com.athompson.virgin.networking.Status
 import com.athompson.virgin.setLayoutManagerVertical
 import com.athompson.virgin.showVerticalDividers
 import com.athompson.virgin.ui.people.detail.PersonDetailFragment
+import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -54,7 +55,6 @@ class PeopleFragment : Fragment() {
         binding.viewModel = peopleViewModel
         peopleViewModel.people.observe(viewLifecycleOwner, observer)
         initialiseUIElements()
-        initialiseObservers()
         return binding.root
     }
 
@@ -90,13 +90,6 @@ class PeopleFragment : Fragment() {
         }
     }
 
-    private fun initialiseObservers() {
-
-        peopleViewModel.text.observe(viewLifecycleOwner) {
-            binding.textPeople.text = it
-        }
-    }
-
     inner class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.ViewHolder>(), KoinComponent {
         private var data = mutableListOf<Person?>()
 
@@ -117,8 +110,14 @@ class PeopleFragment : Fragment() {
                 }
             }
 
+            Glide.with(requireParentFragment())
+                .load(data[position]?.avatar)
+                .placeholder(R.drawable.ic_baseline_person_24)
+                .into(holder.binding.avatarView)
 
-            holder.binding.firstName.text = data[position]?.firstName
+            holder.binding.fullName.text = "${data[position]?.firstName} {${data[position]?.lastName}"
+            holder.binding.jobTitle.text = "${data[position]?.jobtitle}"
+            holder.binding.email.text = "${data[position]?.email}"
         }
 
         override fun getItemCount(): Int {

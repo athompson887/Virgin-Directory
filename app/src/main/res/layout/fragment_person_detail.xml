@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.athompson.virgin.ui.people.PeopleFragment"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.athompson.virgin.ui.people.PeopleFragment">
 
     <data>
         <variable
@@ -10,53 +10,120 @@
             type="com.athompson.virgin.ui.people.detail.PersonViewModel" />
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_wraper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_scrollFlags="scroll|enterAlways">
+
+
+        <ImageView
+            android:id="@+id/mainImage"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="64dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/ic_baseline_person_24"
+            app:civ_border_width="3dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/mainImage"
+            app:civ_border_color="@color/virgin_200"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/first_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Andrew"
+            android:layout_marginEnd="4dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            app:layout_constraintEnd_toStartOf="@+id/last_name_text"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/avatar_view" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/last_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Thompson"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/text_colour_1"
+            android:layout_marginStart="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/first_name_text"
+            app:layout_constraintTop_toBottomOf="@id/avatar_view" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/email_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="a.thompson887@btinternet.com"
+            android:textColor="@color/text_colour_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/last_name_text" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/job_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Worker"
+            android:textColor="@color/text_colour_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email_text" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/created_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Created at 13/04/22"
+            android:textColor="@color/text_colour_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/job_title" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/favourite_colour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Favourite Colour Indigo"
+            android:textColor="@color/text_colour_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/created_at" />
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/id"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/firstName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/lastName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/jobtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/fromName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/createdAt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/favouriteColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Favourite Colour Indigo"
+            android:textColor="@color/text_colour_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/favourite_colour" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

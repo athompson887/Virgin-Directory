@@ -7,19 +7,53 @@
     android:background="@android:color/white"
     android:padding="8dp">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatar_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_person_24"
+        app:civ_border_width="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:civ_border_color="@color/virgin_200"/>
+
+
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/firstName"
+        android:id="@+id/fullName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:singleLine="true"
-        android:textAllCaps="true"
-        android:textColor="#141414"
-        android:textSize="13sp"
-        tools:text="shipped"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/text_colour_3"
+        android:layout_marginLeft="16dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        tools:text="Andrew Thompson"
+        app:layout_constraintStart_toEndOf="@id/avatar_view"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:visibility="visible" />
-
+        app:layout_constraintBottom_toTopOf="@id/jobTitle" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/jobTitle"
+        android:layout_width="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/text_colour_3"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        tools:text="Worker"
+        app:layout_constraintStart_toEndOf="@id/avatar_view"
+        app:layout_constraintTop_toBottomOf="@id/fullName"
+        app:layout_constraintBottom_toTopOf="@id/email" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/text_colour_3"
+        android:layout_marginLeft="16dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="a.thompson887@btinternet.com"
+        app:layout_constraintStart_toEndOf="@id/avatar_view"
+        app:layout_constraintTop_toBottomOf="@id/jobTitle"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

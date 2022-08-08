@@ -6,20 +6,67 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:padding="8dp">
-
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/available_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="16dp"
+        android:src="@drawable/ic_baseline_meeting_room_24"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/roomText"
+        android:id="@+id/created_at"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:singleLine="true"
-        android:textAllCaps="true"
-        android:textColor="#141414"
-        android:textSize="13sp"
-        tools:text="shipped"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/text_colour_3"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        app:layout_constraintStart_toEndOf="@id/available_icon"
+        app:layout_constraintEnd_toStartOf="@id/bookButton"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="29031968" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/is_occupied"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/text_colour_3"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintStart_toEndOf="@id/available_icon"
+        app:layout_constraintEnd_toStartOf="@id/bookButton"
+        app:layout_constraintTop_toBottomOf="@id/created_at"
+        tools:text="false" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/max_occupancy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/text_colour_3"
+        tools:text="10"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        app:layout_constraintStart_toEndOf="@id/available_icon"
+        app:layout_constraintEnd_toStartOf="@id/bookButton"
+        app:layout_constraintTop_toBottomOf="@id/is_occupied" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/text_colour_3"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        app:layout_constraintStart_toEndOf="@id/available_icon"
+        app:layout_constraintEnd_toStartOf="@id/bookButton"
+        tools:text="id"
+        app:layout_constraintTop_toBottomOf="@id/max_occupancy"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    <Button
+        android:id="@+id/bookButton"
+        android:text="book"
+        android:layout_width="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="id"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:visibility="visible" />
-
+        android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

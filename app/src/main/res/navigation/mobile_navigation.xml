@@ -3,13 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
-
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.athompson.virgin.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+    app:startDestination="@+id/navigation_rooms">
 
     <fragment
         android:id="@+id/navigation_rooms"
@@ -40,6 +34,6 @@
     <fragment
         android:id="@+id/personDetailFragment"
         android:name="com.athompson.virgin.ui.people.detail.PersonDetailFragment"
-        android:label="fragment_person_detail"
+        android:label="details"
         tools:layout="@layout/fragment_person_detail" />
 </navigation>

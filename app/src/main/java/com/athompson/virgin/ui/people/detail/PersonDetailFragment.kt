@@ -1,24 +1,23 @@
 package com.athompson.virgin.ui.people.detail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.athompson.virgin.R
-import com.athompson.virgin.data.Data
 import com.athompson.virgin.data.Person
-import com.athompson.virgin.databinding.FragmentPeopleBinding
 import com.athompson.virgin.databinding.FragmentPersonDetailBinding
-import com.athompson.virgin.networking.Resource
-import com.athompson.virgin.networking.Status
-import com.athompson.virgin.ui.people.PeopleFragment
+import com.athompson.virgin.formatDateString
+import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
+import java.text.SimpleDateFormat
+import java.util.*
 
 val personDetailFragmentModule = module {
     factory { PersonDetailFragment() }
@@ -40,8 +39,11 @@ class PersonDetailFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_person_detail, container, false)
         binding.viewModel = personDetailViewModel
+
+
         initialiseUIElements()
         initialiseObservers()
+        personDetailViewModel.selectedPerson.postValue(sharedPerson)
         return binding.root
     }
 
@@ -55,20 +57,43 @@ class PersonDetailFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
+
+
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     private fun initialiseObservers() {
-        binding.avatar.text = sharedPerson?.avatar?:""
-        binding.createdAt.text = sharedPerson?.createdAt?:""
-        binding.email.text = sharedPerson?.email?:""
-        binding.favouriteColor.text = sharedPerson?.favouriteColor?:""
-        binding.firstName.text = sharedPerson?.firstName?:""
-        binding.lastName.text = sharedPerson?.lastName?:""
-        binding.fromName.text = sharedPerson?.fromName?:""
-        binding.id.text = sharedPerson?.id?:""
-        binding.jobtitle.text = sharedPerson?.jobtitle?:""
-        binding.to.text = sharedPerson?.to?:""
+        personDetailViewModel.selectedPerson.observe(viewLifecycleOwner) {
 
-        personDetailViewModel.text.observe(viewLifecycleOwner) {
+            binding.firstNameText.text = it.firstName
+            binding.lastNameText.text = it.lastName
+            binding.emailText.text = it.email
 
+            Glide.with(this)
+                .load(it.avatar)
+                .placeholder(R.drawable.ic_baseline_person_24)
+                .into(binding.avatarView)
+
+            binding.jobTitle.text =it.jobtitle
+
+            val dateStr = formatDateString(it.createdAt)
+            if(dateStr.isNotEmpty()) {
+                binding.createdAt.text = "Created : $dateStr"
+            }
+            else{
+                binding.createdAt.text = ""
+            }
+
+            val formatter = SimpleDateFormat("yyyy-MM-dd")
+            val date:Date? = formatter.parse(it.createdAt)
+            if(date!=null) {
+                val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val formattedDate = dateFormatter.format(date)
+                binding.createdAt.text = "Created : $formattedDate"
+            }
+            else{
+                binding.createdAt.text = ""
+            }
+            binding.favouriteColour.text = "My favourite colour is ${it.favouriteColor}"
+            binding.id.text = "ID Number ${it.id}"
         }
     }
 }

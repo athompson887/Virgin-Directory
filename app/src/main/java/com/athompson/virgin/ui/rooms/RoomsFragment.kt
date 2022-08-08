@@ -27,8 +27,6 @@ class RoomsFragment : Fragment() {
     private lateinit var binding: FragmentRoomsBinding
     private var _adapter:RoomsAdapter? = null
 
-
-
     private val observer = Observer<Resource<List<Room>>> {
         when (it.status) {
             Status.SUCCESS -> showResult(it)
@@ -47,7 +45,6 @@ class RoomsFragment : Fragment() {
         binding.viewModel = roomsViewModel
         roomsViewModel.rooms.observe(viewLifecycleOwner, observer)
         initialiseUIElements()
-        initialiseObservers()
         return binding.root
     }
 
@@ -76,18 +73,9 @@ class RoomsFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-
         binding.progressInfo.text = buildString {
-        append(getString(R.string.error_string))
-        append(message)
-    }
-    }
-
-    private fun initialiseObservers() {
-
-        val textView = binding.textRooms
-        roomsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            append(getString(R.string.error_string))
+            append(message)
         }
     }
 }

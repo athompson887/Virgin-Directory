@@ -21,9 +21,4 @@ class PeopleViewModel(
             emit(Resource.loading(null))
             emit(peopleRepository.getPeople())
         }
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is peoples fragment"
-    }
-    val text: LiveData<String> = _text
 }

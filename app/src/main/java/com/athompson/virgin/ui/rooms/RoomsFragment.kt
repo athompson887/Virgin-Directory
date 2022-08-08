@@ -4,35 +4,49 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
-import com.athompson.virgin.data.ApiInterface
+import com.athompson.virgin.R
 import com.athompson.virgin.data.Room
 import com.athompson.virgin.databinding.FragmentRoomsBinding
+import com.athompson.virgin.networking.Resource
+import com.athompson.virgin.networking.Status
 import com.athompson.virgin.setLayoutManagerVertical
 import com.athompson.virgin.showVerticalDividers
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.dsl.module
+
+val roomFragmentModule = module {
+    factory { RoomsFragment() }
+}
 
 class RoomsFragment : Fragment() {
-
-    private var _binding: FragmentRoomsBinding? = null
+    private val roomsViewModel: RoomsViewModel by viewModel()
+    private lateinit var binding: FragmentRoomsBinding
     private var _adapter:RoomsAdapter? = null
-    private val binding get() = _binding!!
+
+
+
+    private val observer = Observer<Resource<List<Room>>> {
+        when (it.status) {
+            Status.SUCCESS -> showResult(it)
+            Status.ERROR -> showError(it.message!!)
+            Status.LOADING -> showLoading()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        _binding = FragmentRoomsBinding.inflate(inflater, container, false)
+        super.onCreateView(inflater, container, savedInstanceState)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rooms, container, false)
+        binding.viewModel = roomsViewModel
+        roomsViewModel.rooms.observe(viewLifecycleOwner, observer)
         initialiseUIElements()
-
         initialiseObservers()
         return binding.root
     }
@@ -45,32 +59,35 @@ class RoomsFragment : Fragment() {
         binding.recycler.adapter = _adapter
     }
 
+    private fun showResult(resource: Resource<List<Room>>) {
+        resource.data?.let { _adapter?.updateData(it) }
+        hideLoading()
+    }
+
+    private fun hideLoading() {
+        binding.progressLoader.visibility = View.GONE
+        binding.progressInfo.visibility = View.GONE
+    }
+
+    private fun showLoading() {
+        binding.progressLoader.visibility = View.VISIBLE
+        binding.progressInfo.visibility = View.VISIBLE
+        binding.progressInfo.text = getString(R.string.loading_message)
+    }
+
+    private fun showError(message: String) {
+
+        binding.progressInfo.text = buildString {
+        append(getString(R.string.error_string))
+        append(message)
+    }
+    }
+
     private fun initialiseObservers() {
-        val roomsViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(RoomsViewModel::class.java)
-        val apiInterface = ApiInterface.create().getRooms()
-        apiInterface.enqueue( object : Callback<List<Room>> {
-            override fun onResponse(call: Call<List<Room>>, response: Response<List<Room>>) {
-                if(response.body() != null) {
-                    roomsViewModel.searchRoomsLiveData.postValue(response.body()!!)
-                }
-            }
 
-            override fun onFailure(call: Call<List<Room>>, t: Throwable) {
-            }
-        })
-
-        roomsViewModel.searchRoomsLiveData.observe(viewLifecycleOwner, Observer {
-            _adapter?.updateData(it)
-        })
-
-        val textView: TextView = binding.textRooms
+        val textView = binding.textRooms
         roomsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

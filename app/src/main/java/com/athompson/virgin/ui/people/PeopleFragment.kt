@@ -1,6 +1,5 @@
 package com.athompson.virgin.ui.people
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,23 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.RecyclerView
 import com.athompson.virgin.R
 import com.athompson.virgin.data.Person
 import com.athompson.virgin.databinding.FragmentPeopleBinding
-import com.athompson.virgin.databinding.PersonItemBinding
 import com.athompson.virgin.networking.Resource
 import com.athompson.virgin.networking.Status
 import com.athompson.virgin.setLayoutManagerVertical
 import com.athompson.virgin.showVerticalDividers
 import com.athompson.virgin.ui.people.detail.PersonViewModel
-import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.dsl.module
 
 val peopleFragmentModule = module {
-    single { PeopleFragment() }
+    factory { PeopleFragment() }
 }
 
 class PeopleFragment : Fragment(),KoinComponent {
@@ -59,10 +55,12 @@ class PeopleFragment : Fragment(),KoinComponent {
 
     private fun initialiseUIElements() {
         _adapter = PeopleAdapter {
-                it: Person ->
-            print(it.avatar)
+            val personDetailViewModel: PersonViewModel by viewModel()
+            personDetailViewModel.selectedPerson.postValue(it)
+            val action =
+                PeopleFragmentDirections.actionNavigationPeopleToPersonDetailFragment()
+            findNavController().navigate(action)
         }
-     //   _adapter = PeopleAdapter()
         binding.recycler.setLayoutManagerVertical()
         binding.recycler.showVerticalDividers()
         binding.recycler.itemAnimator = DefaultItemAnimator()
@@ -92,58 +90,4 @@ class PeopleFragment : Fragment(),KoinComponent {
             append(message)
         }
     }
-
-    inner class PeopleAdapter(
-        private var onItemClicked: ((movie: Person) -> Unit)
-    ) : RecyclerView.Adapter<PeopleAdapter.ViewHolder>(), KoinComponent {
-        private var data = mutableListOf<Person?>()
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.person_item, parent, false)
-            return ViewHolder(v)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.itemView.setOnClickListener {
-                val person = data[position]
-                val personDetailViewModel: PersonViewModel by viewModel()
-                personDetailViewModel.selectedPerson.postValue(person)
-                if(person!=null) {
-                    val action =
-                        PeopleFragmentDirections.actionNavigationPeopleToPersonDetailFragment()
-                    findNavController().navigate(action)
-                    onItemClicked(person)
-                }
-            }
-
-            Glide.with(requireParentFragment())
-                .load(data[position]?.avatar)
-                .placeholder(R.drawable.ic_baseline_person_24)
-                .into(holder.binding.avatarView)
-
-            holder.binding.fullName.text = "${data[position]?.firstName} {${data[position]?.lastName}"
-            holder.binding.jobTitle.text = "${data[position]?.jobtitle}"
-            holder.binding.email.text = "${data[position]?.email}"
-        }
-
-        override fun getItemCount(): Int {
-            return data.size
-        }
-
-        @SuppressLint("NotifyDataSetChanged")
-        fun updateData(newData: List<Person?>) {
-            data.clear()
-            data.addAll(newData)
-            notifyDataSetChanged()
-        }
-
-
-        inner class ViewHolder internal constructor(itemView: View) :
-            RecyclerView.ViewHolder(itemView) {
-            val binding: PersonItemBinding = PersonItemBinding.bind(itemView)
-        }
-    }
-
-
 }

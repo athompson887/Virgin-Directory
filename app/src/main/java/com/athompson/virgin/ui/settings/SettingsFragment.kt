@@ -4,43 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.athompson.virgin.R
 import com.athompson.virgin.databinding.FragmentSettingsBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment() {
-
-    private var _binding: FragmentSettingsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
+    private val settingsViewModel: SettingsViewModel by viewModel()
+    private lateinit var binding: FragmentSettingsBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val settingsViewModel =
-            ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
-            )[SettingsViewModel::class.java]
-
-        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textSettings
-        settingsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        super.onCreateView(inflater, container, savedInstanceState)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
+        settingsViewModel.testMode.observe(viewLifecycleOwner) {
+            binding.liveSwitch.isChecked = it
         }
 
-        return root
+        setCheckedChangeListener()
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun setCheckedChangeListener() {
+        binding.liveSwitch.setOnCheckedChangeListener { _, isChecked ->
+            val msg = getString(if (isChecked) R.string.on else R.string.off)
+            binding.liveSwitch.text = msg
+            settingsViewModel.setTestMode(isChecked)
+
+        }
     }
 }

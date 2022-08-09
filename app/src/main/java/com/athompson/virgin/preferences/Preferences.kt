@@ -11,27 +11,16 @@ val prefModule = module {
 
 class Preferences(context: Context) {
     private val preferences: SharedPreferences = context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
-    private val showFragmentKey = "showFragment"
-    private val fragmentContentKey = "fragmentContent"
+    private val testModeKey = "testMode"
 
     init {
-        storeShouldShowFragment(true)
-        storeFragmentContent("Hey, this is a fragment")
+        setTestMode(true)
     }
 
-    private fun storeFragmentContent(content: String) {
-        preferences.edit().putString(fragmentContentKey, content).apply()
+    fun setTestMode(testMode: Boolean) {
+        preferences.edit().putBoolean(testModeKey, testMode).apply()
     }
-
-    fun getFragmentContent(): String? {
-        return preferences.getString(fragmentContentKey, "")
-    }
-
-    private fun storeShouldShowFragment(shouldShow: Boolean) {
-        preferences.edit().putBoolean(showFragmentKey, shouldShow).apply()
-    }
-
-    fun getShouldShowFragment(): Boolean {
-        return preferences.getBoolean(showFragmentKey, false)
+    fun getTestMode(): Boolean {
+        return preferences.getBoolean(testModeKey, false)
     }
 }

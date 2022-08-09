@@ -46,7 +46,7 @@ class RoomsFragment : Fragment() {
     }
 
     private fun initialiseUIElements() {
-            _adapter = RoomsAdapter{
+        _adapter = RoomsAdapter{
                 Toast.makeText(requireContext(),getString(R.string.room_booked), Toast.LENGTH_LONG).show()
         }
         binding.recycler.setLayoutManagerVertical()

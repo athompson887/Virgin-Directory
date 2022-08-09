@@ -55,7 +55,6 @@ class PeopleAdapter(
         notifyDataSetChanged()
     }
 
-
     inner class ViewHolder internal constructor(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         val binding: PersonItemBinding = PersonItemBinding.bind(itemView)

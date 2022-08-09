@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class PersonDetailFragment : Fragment() {
     private val personDetailViewModel: PersonViewModel by viewModel()
@@ -37,6 +39,7 @@ class PersonDetailFragment : Fragment() {
     }
 
     private fun initialiseUIElements() {
+        (requireActivity() as AppCompatActivity?)?.supportActionBar?.title = "Details"
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
@@ -47,11 +50,11 @@ class PersonDetailFragment : Fragment() {
     }
 
 
-
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     private fun initialiseObservers() {
         personDetailViewModel.selectedPerson.observe(viewLifecycleOwner) {
 
+            (requireActivity() as AppCompatActivity?)?.supportActionBar?.title = "${it.firstName} ${it.lastName}"
             binding.firstNameText.text = it.firstName
             binding.lastNameText.text = it.lastName
             binding.emailText.text = it.email

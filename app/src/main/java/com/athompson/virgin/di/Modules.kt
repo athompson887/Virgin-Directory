@@ -8,12 +8,14 @@ import com.athompson.virgin.ui.people.detail.PersonDetailFragment
 import com.athompson.virgin.ui.people.detail.PersonViewModel
 import com.athompson.virgin.ui.rooms.RoomsFragment
 import com.athompson.virgin.ui.rooms.RoomsViewModel
+import com.athompson.virgin.ui.settings.SettingsViewModel
 import org.koin.dsl.module
 
 val peopleModule = module {
     factory { PeopleFragment() }
     factory { PeopleViewModel(get()) }
     single { PersonViewModel(get()) }
+    single { SettingsViewModel() }
     factory { PeopleRepository(get(), get()) }
     factory { PersonDetailFragment() }
 }

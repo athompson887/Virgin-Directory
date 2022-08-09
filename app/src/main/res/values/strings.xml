@@ -7,4 +7,7 @@
     <string name="loading_message">Loading</string>
     <string name="error_string">Error</string>
     <string name="room_booked">Room Booked</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="live_mode">Live Mode</string>
 </resources>

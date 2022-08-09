@@ -1,6 +1,5 @@
 package com.athompson.virgin.networking
-
-import com.athompson.virgin.getURL
+import com.athompson.virgin.application.VirginDirectoryApplication.Companion.getBaseUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -13,12 +12,12 @@ val networkModule = module {
     factory { provideRoomApi(get()) }
     factory { providePersonApi(get()) }
     factory { provideLoggingInterceptor() }
-    single { provideRetrofit(get()) }
+    single { provideRetrofit(get(), baseUrl = getBaseUrl()) }
     factory { ResponseHandler() }
 }
 
-fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-    return Retrofit.Builder().baseUrl(getURL()).client(okHttpClient)
+fun provideRetrofit(okHttpClient: OkHttpClient,baseUrl:String): Retrofit {
+    return Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create()).build()
 }
 

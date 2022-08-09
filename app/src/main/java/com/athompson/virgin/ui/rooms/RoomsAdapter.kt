@@ -44,7 +44,7 @@ class RoomsAdapter(private var onItemClicked: ((selectedRoom: Room) -> Unit)) : 
            holder.binding.availableIcon.setImageResource(R.drawable.ic_baseline_meeting_room_24)
            holder.binding.isOccupied.text = "Room is available"
            holder.binding.bookButton.visibility = View.VISIBLE
-           holder.binding.availableIcon.setOnClickListener {
+           holder.binding.bookButton.setOnClickListener {
                if (room != null) {
                    onItemClicked(room)
                }
@@ -53,9 +53,7 @@ class RoomsAdapter(private var onItemClicked: ((selectedRoom: Room) -> Unit)) : 
         holder.binding.maxOccupancy.text = "Max Occupancy ${room?.maxOccupancy}"
 
         holder.itemView.setOnClickListener {
-            if(room!=null) {
-                onItemClicked(room)
-            }
+
         }
     }
 

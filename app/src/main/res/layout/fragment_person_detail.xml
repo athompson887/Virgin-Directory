@@ -17,7 +17,6 @@
         android:background="@color/white"
         app:layout_scrollFlags="scroll|enterAlways">
 
-
         <ImageView
             android:id="@+id/mainImage"
             android:layout_width="match_parent"
@@ -33,13 +32,12 @@
             android:id="@+id/avatar_view"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="70dp"
             android:src="@drawable/ic_baseline_person_24"
             app:civ_border_width="3dp"
-            android:layout_marginBottom="32dp"
+            android:paddingBottom="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/mainImage"
+            app:layout_constraintTop_toBottomOf="@id/mainImage"
             app:civ_border_color="@color/virgin_200"/>
 
         <com.google.android.material.textview.MaterialTextView
@@ -49,6 +47,7 @@
             android:layout_gravity="center_horizontal"
             android:text="Andrew"
             android:layout_marginEnd="4dp"
+            android:paddingBottom="8dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintEnd_toStartOf="@+id/last_name_text"
             app:layout_constraintHorizontal_bias="0.5"
@@ -65,6 +64,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/text_colour_1"
             android:layout_marginStart="4dp"
+            android:paddingBottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/first_name_text"
@@ -78,6 +78,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="a.thompson887@btinternet.com"
             android:textColor="@color/text_colour_3"
+            android:paddingBottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/last_name_text" />
@@ -86,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:paddingBottom="8dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Worker"
             android:textColor="@color/text_colour_3"
@@ -97,6 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:paddingBottom="8dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Created at 13/04/22"
             android:textColor="@color/text_colour_3"
@@ -110,6 +113,7 @@
             android:gravity="center_horizontal"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Favourite Colour Indigo"
+            android:paddingBottom="8dp"
             android:textColor="@color/text_colour_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,8 +123,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Favourite Colour Indigo"
+            android:paddingBottom="8dp"
             android:textColor="@color/text_colour_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

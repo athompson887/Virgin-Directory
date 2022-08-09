@@ -34,6 +34,5 @@
     <fragment
         android:id="@+id/personDetailFragment"
         android:name="com.athompson.virgin.ui.people.detail.PersonDetailFragment"
-        android:label="details"
         tools:layout="@layout/fragment_person_detail" />
 </navigation>

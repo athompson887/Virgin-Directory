@@ -3,6 +3,8 @@ import com.athompson.virgin.data.Person
 import com.athompson.virgin.networking.PeopleApi
 import com.athompson.virgin.networking.Resource
 import com.athompson.virgin.networking.ResponseHandler
+import com.athompson.virgin.preferences.Preferences
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val peopleRepoModule = module {

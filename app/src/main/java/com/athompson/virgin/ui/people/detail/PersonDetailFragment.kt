@@ -27,10 +27,6 @@ class PersonDetailFragment : Fragment() {
     private val personDetailViewModel: PersonViewModel by viewModel()
     private lateinit var binding: FragmentPersonDetailBinding
 
-    companion object {
-        var sharedPerson: Person? = null
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +39,6 @@ class PersonDetailFragment : Fragment() {
 
         initialiseUIElements()
         initialiseObservers()
-        personDetailViewModel.selectedPerson.postValue(sharedPerson)
         return binding.root
     }
 

@@ -19,18 +19,17 @@ import com.athompson.virgin.networking.Resource
 import com.athompson.virgin.networking.Status
 import com.athompson.virgin.setLayoutManagerVertical
 import com.athompson.virgin.showVerticalDividers
-import com.athompson.virgin.ui.people.detail.PersonDetailFragment
+import com.athompson.virgin.ui.people.detail.PersonViewModel
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import org.koin.dsl.module
 
 val peopleFragmentModule = module {
-    factory { PeopleFragment() }
+    single { PeopleFragment() }
 }
 
-class PeopleFragment : Fragment() {
+class PeopleFragment : Fragment(),KoinComponent {
     private val peopleViewModel: PeopleViewModel by viewModel()
     private lateinit var binding: FragmentPeopleBinding
     private var _adapter: PeopleAdapter? = null
@@ -59,7 +58,11 @@ class PeopleFragment : Fragment() {
     }
 
     private fun initialiseUIElements() {
-        _adapter = PeopleAdapter()
+        _adapter = PeopleAdapter {
+                it: Person ->
+            print(it.avatar)
+        }
+     //   _adapter = PeopleAdapter()
         binding.recycler.setLayoutManagerVertical()
         binding.recycler.showVerticalDividers()
         binding.recycler.itemAnimator = DefaultItemAnimator()
@@ -90,7 +93,9 @@ class PeopleFragment : Fragment() {
         }
     }
 
-    inner class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.ViewHolder>(), KoinComponent {
+    inner class PeopleAdapter(
+        private var onItemClicked: ((movie: Person) -> Unit)
+    ) : RecyclerView.Adapter<PeopleAdapter.ViewHolder>(), KoinComponent {
         private var data = mutableListOf<Person?>()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -102,11 +107,13 @@ class PeopleFragment : Fragment() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.itemView.setOnClickListener {
                 val person = data[position]
-                PersonDetailFragment.sharedPerson = person
+                val personDetailViewModel: PersonViewModel by viewModel()
+                personDetailViewModel.selectedPerson.postValue(person)
                 if(person!=null) {
                     val action =
                         PeopleFragmentDirections.actionNavigationPeopleToPersonDetailFragment()
                     findNavController().navigate(action)
+                    onItemClicked(person)
                 }
             }
 

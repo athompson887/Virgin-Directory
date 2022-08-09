@@ -14,7 +14,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class PeopleAdapter(
-    private var onItemClicked: ((movie: Person) -> Unit)
+    private var onItemClicked: ((selectedPerson: Person) -> Unit)
 ) : RecyclerView.Adapter<PeopleAdapter.ViewHolder>(), KoinComponent {
 
     private var data = mutableListOf<Person?>()
@@ -25,6 +25,7 @@ class PeopleAdapter(
         return ViewHolder(v)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             val person = data[position]

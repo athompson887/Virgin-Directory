@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,7 +17,7 @@ import com.athompson.virgin.networking.Status
 import com.athompson.virgin.setLayoutManagerVertical
 import com.athompson.virgin.showVerticalDividers
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.dsl.module
+
 
 class RoomsFragment : Fragment() {
     private val roomsViewModel: RoomsViewModel by viewModel()
@@ -45,7 +46,9 @@ class RoomsFragment : Fragment() {
     }
 
     private fun initialiseUIElements() {
-        _adapter = RoomsAdapter()
+            _adapter = RoomsAdapter{
+                Toast.makeText(requireContext(),getString(R.string.room_booked), Toast.LENGTH_LONG).show()
+        }
         binding.recycler.setLayoutManagerVertical()
         binding.recycler.showVerticalDividers()
         binding.recycler.itemAnimator = DefaultItemAnimator()

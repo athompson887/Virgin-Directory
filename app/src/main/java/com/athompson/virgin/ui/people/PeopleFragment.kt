@@ -14,14 +14,11 @@ import com.athompson.virgin.data.Person
 import com.athompson.virgin.databinding.FragmentPeopleBinding
 import com.athompson.virgin.networking.Resource
 import com.athompson.virgin.networking.Status
-import com.athompson.virgin.repository.PeopleRepository
 import com.athompson.virgin.setLayoutManagerVertical
 import com.athompson.virgin.showVerticalDividers
-import com.athompson.virgin.ui.people.detail.PersonDetailFragment
 import com.athompson.virgin.ui.people.detail.PersonViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
-import org.koin.dsl.module
 
 class PeopleFragment : Fragment(),KoinComponent {
     private val peopleViewModel: PeopleViewModel by viewModel()

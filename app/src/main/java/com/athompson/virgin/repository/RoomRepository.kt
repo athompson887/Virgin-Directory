@@ -3,7 +3,6 @@ import com.athompson.virgin.data.Room
 import com.athompson.virgin.networking.Resource
 import com.athompson.virgin.networking.ResponseHandler
 import com.athompson.virgin.networking.RoomApi
-import org.koin.dsl.module
 
 open class RoomRepository(
     private val roomApi: RoomApi,

@@ -9,8 +9,10 @@ import com.athompson.virgin.R
 import com.athompson.virgin.data.Room
 import com.athompson.virgin.databinding.RoomItemBinding
 import com.athompson.virgin.formatDateString
+import org.koin.core.component.KoinComponent
 
-class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.ViewHolder>() {
+
+class RoomsAdapter(private var onItemClicked: ((selectedRoom: Room) -> Unit)) : RecyclerView.Adapter<RoomsAdapter.ViewHolder>(),KoinComponent {
     private var data = mutableListOf<Room?>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,8 +44,19 @@ class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.ViewHolder>() {
            holder.binding.availableIcon.setImageResource(R.drawable.ic_baseline_meeting_room_24)
            holder.binding.isOccupied.text = "Room is available"
            holder.binding.bookButton.visibility = View.VISIBLE
+           holder.binding.availableIcon.setOnClickListener {
+               if (room != null) {
+                   onItemClicked(room)
+               }
+           }
         }
-        holder.binding.maxOccupancy.text = "Max Ooccupancy ${room?.maxOccupancy}"
+        holder.binding.maxOccupancy.text = "Max Occupancy ${room?.maxOccupancy}"
+
+        holder.itemView.setOnClickListener {
+            if(room!=null) {
+                onItemClicked(room)
+            }
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

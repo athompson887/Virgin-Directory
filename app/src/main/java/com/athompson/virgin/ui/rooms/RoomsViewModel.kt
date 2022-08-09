@@ -1,10 +1,12 @@
 package com.athompson.virgin.ui.rooms
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import com.athompson.virgin.networking.Resource
 import com.athompson.virgin.repository.RoomRepository
 import kotlinx.coroutines.Dispatchers
-import org.koin.dsl.module
 
 class RoomsViewModel(
     private val roomRepository: RoomRepository

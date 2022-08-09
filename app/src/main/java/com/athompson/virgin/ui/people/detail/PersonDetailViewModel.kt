@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.athompson.virgin.data.Person
 import com.athompson.virgin.repository.PeopleRepository
-import org.koin.dsl.module
 
 
 class PersonViewModel(

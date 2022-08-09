@@ -10,12 +10,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.athompson.virgin.R
-import com.athompson.virgin.data.Person
 import com.athompson.virgin.databinding.FragmentPersonDetailBinding
 import com.athompson.virgin.formatDateString
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.dsl.module
 import java.text.SimpleDateFormat
 import java.util.*
 

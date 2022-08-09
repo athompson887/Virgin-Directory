@@ -25,7 +25,7 @@ class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.ViewHolder>() {
         val createdAt = room?.createdAt
         holder.binding.createdAt.text = ""
         if(createdAt!=null) {
-            val dateStr = formatDateString(room.createdAt)
+            val dateStr = room.createdAt.formatDateString()
             if (dateStr.isNotEmpty()) {
                 holder.binding.createdAt.text = "Created : $dateStr"
             } else {

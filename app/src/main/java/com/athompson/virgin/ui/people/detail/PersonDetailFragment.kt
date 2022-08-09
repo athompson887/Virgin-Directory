@@ -65,7 +65,7 @@ class PersonDetailFragment : Fragment() {
 
             binding.jobTitle.text =it.jobtitle
 
-            val dateStr = formatDateString(it.createdAt)
+            val dateStr = it.createdAt.formatDateString()
             if(dateStr.isNotEmpty()) {
                 binding.createdAt.text = "Created : $dateStr"
             }

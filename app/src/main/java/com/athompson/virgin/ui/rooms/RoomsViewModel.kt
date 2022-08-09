@@ -6,9 +6,6 @@ import com.athompson.virgin.repository.RoomRepository
 import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module
 
-val viewModelRoomModule = module {
-    factory { RoomsViewModel(get()) }
-}
 class RoomsViewModel(
     private val roomRepository: RoomRepository
 ) : ViewModel() {

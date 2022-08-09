@@ -18,10 +18,6 @@ import com.athompson.virgin.showVerticalDividers
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
 
-val roomFragmentModule = module {
-    factory { RoomsFragment() }
-}
-
 class RoomsFragment : Fragment() {
     private val roomsViewModel: RoomsViewModel by viewModel()
     private lateinit var binding: FragmentRoomsBinding

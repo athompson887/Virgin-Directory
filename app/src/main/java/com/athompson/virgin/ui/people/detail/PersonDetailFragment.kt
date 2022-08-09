@@ -19,10 +19,6 @@ import org.koin.dsl.module
 import java.text.SimpleDateFormat
 import java.util.*
 
-val personDetailFragmentModule = module {
-    factory { PersonDetailFragment() }
-}
-
 class PersonDetailFragment : Fragment() {
     private val personDetailViewModel: PersonViewModel by viewModel()
     private lateinit var binding: FragmentPersonDetailBinding

@@ -5,10 +5,6 @@ import com.athompson.virgin.networking.ResponseHandler
 import com.athompson.virgin.networking.RoomApi
 import org.koin.dsl.module
 
-val roomRepoModule = module {
-    factory { RoomRepository(get(), get()) }
-}
-
 open class RoomRepository(
     private val roomApi: RoomApi,
     private val responseHandler: ResponseHandler

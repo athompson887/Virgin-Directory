@@ -6,9 +6,7 @@ import com.athompson.virgin.data.Person
 import com.athompson.virgin.repository.PeopleRepository
 import org.koin.dsl.module
 
-val viewModelPersonModule = module {
-    single { PersonViewModel(get()) }
-}
+
 class PersonViewModel(
     private val peopleRepository: PeopleRepository
 ) : ViewModel() {

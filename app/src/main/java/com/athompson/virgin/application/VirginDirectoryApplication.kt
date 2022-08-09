@@ -1,15 +1,10 @@
 package com.athompson.virgin.application
 import android.app.Application
+import com.athompson.virgin.di.peopleModule
+import com.athompson.virgin.di.roomModule
 import com.athompson.virgin.networking.networkModule
 import com.athompson.virgin.preferences.prefModule
-import com.athompson.virgin.repository.peopleRepoModule
-import com.athompson.virgin.repository.roomRepoModule
-import com.athompson.virgin.ui.people.detail.personDetailFragmentModule
-import com.athompson.virgin.ui.people.detail.viewModelPersonModule
-import com.athompson.virgin.ui.people.peopleFragmentModule
-import com.athompson.virgin.ui.people.viewModelPeopleModule
-import com.athompson.virgin.ui.rooms.roomFragmentModule
-import com.athompson.virgin.ui.rooms.viewModelRoomModule
+import com.athompson.virgin.utility.AppUtilDependency
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,10 +16,8 @@ class VirginDirectoryApplication : Application() {
         startKoin {
             androidLogger(Level.ERROR)
             androidContext(this@VirginDirectoryApplication)
-            modules(listOf(prefModule, networkModule,
-                roomFragmentModule, peopleFragmentModule,viewModelPersonModule,
-                viewModelRoomModule, viewModelPeopleModule,
-                peopleRepoModule, roomRepoModule, personDetailFragmentModule
+            modules(listOf(prefModule, networkModule,AppUtilDependency,
+                roomModule,peopleModule
             ))
         }
     }

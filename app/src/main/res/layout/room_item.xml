@@ -13,8 +13,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:padding="16dp"
         android:src="@drawable/ic_baseline_meeting_room_24"
-        android:layout_width="100dp"
-        android:layout_height="100dp"/>
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/created_at"
         android:layout_width="0dp"

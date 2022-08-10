@@ -15,5 +15,10 @@
         <item name="cornerRadius">4dp</item>
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="VirginSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/virgin_200</item>
+        <item name="colorSwitchThumbNormal">#f1f1f1</item>
+        <item name="android:colorForeground">#42221f1f</item>
+    </style>
 
 </resources>

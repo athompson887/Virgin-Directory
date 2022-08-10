@@ -10,4 +10,6 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="live_mode">Live Mode</string>
+    <string name="content_description_live_switch">A switch for showing live mode an test mode</string>
+    <string name="content_description_logo">The Virgin Money Logo</string>
 </resources>

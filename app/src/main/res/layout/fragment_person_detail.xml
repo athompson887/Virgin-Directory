@@ -24,6 +24,7 @@
             android:padding="64dp"
             android:scaleType="centerCrop"
             android:src="@drawable/header"
+            android:contentDescription="@String/content_description_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

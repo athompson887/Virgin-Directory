@@ -2,7 +2,6 @@
 <resources>
     <color name="virgin_200">#C40202</color>
     <color name="orange_200">#FF9800</color>
-    <color name="orange_700">#FF5722</color>
     <color name="green">#4CAF50</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

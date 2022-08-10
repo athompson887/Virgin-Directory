@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.athompson.virgin.ui.people.detail.PersonViewModel" />
+            type="com.athompson.virgin.ui.people.detail.PersonDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
 
         <ImageView
             android:id="@+id/mainImage"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:padding="64dp"
             android:scaleType="centerCrop"

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatCallback
+import androidx.appcompat.view.ActionMode
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -20,7 +22,7 @@ import java.util.*
 
 
 class PersonDetailFragment : Fragment() {
-    private val personDetailViewModel: PersonViewModel by viewModel()
+    private val personDetailViewModel: PersonDetailViewModel by viewModel()
     private lateinit var binding: FragmentPersonDetailBinding
 
     override fun onCreateView(
@@ -39,7 +41,6 @@ class PersonDetailFragment : Fragment() {
     }
 
     private fun initialiseUIElements() {
-        (requireActivity() as AppCompatActivity?)?.supportActionBar?.title = "Details"
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
@@ -54,7 +55,7 @@ class PersonDetailFragment : Fragment() {
     private fun initialiseObservers() {
         personDetailViewModel.selectedPerson.observe(viewLifecycleOwner) {
 
-            (requireActivity() as AppCompatActivity?)?.supportActionBar?.title = "${it.firstName} ${it.lastName}"
+           (requireActivity() as AppCompatActivity).supportActionBar?.title = "${it.firstName} ${it.lastName}"
             binding.firstNameText.text = it.firstName
             binding.lastNameText.text = it.lastName
             binding.emailText.text = it.email
@@ -64,7 +65,7 @@ class PersonDetailFragment : Fragment() {
                 .placeholder(R.drawable.ic_baseline_person_24)
                 .into(binding.avatarView)
 
-            binding.jobTitle.text =it.jobtitle
+            binding.jobTitle.text = it.jobtitle
 
             val dateStr = it.createdAt.formatDateString()
             if(dateStr.isNotEmpty()) {
@@ -74,16 +75,8 @@ class PersonDetailFragment : Fragment() {
                 binding.createdAt.text = ""
             }
 
-            val formatter = SimpleDateFormat("yyyy-MM-dd")
-            val date:Date? = formatter.parse(it.createdAt)
-            if(date!=null) {
-                val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                val formattedDate = dateFormatter.format(date)
-                binding.createdAt.text = "Created : $formattedDate"
-            }
-            else{
-                binding.createdAt.text = ""
-            }
+            binding.createdAt.text = "Created : ${it.createdAt.formatDateString()}"
+
             binding.favouriteColour.text = "My favourite colour is ${it.favouriteColor}"
             binding.id.text = "ID Number ${it.id}"
         }

@@ -27,12 +27,10 @@ class RoomsAdapter(private var onItemClicked: ((selectedRoom: Room) -> Unit)) : 
         val createdAt = room?.createdAt
         holder.binding.createdAt.text = ""
         if(createdAt!=null) {
-            val dateStr = room.createdAt.formatDateString()
-            if (dateStr.isNotEmpty()) {
-                holder.binding.createdAt.text = "Created : $dateStr"
-            } else {
-                holder.binding.createdAt.text = ""
-            }
+            holder.binding.createdAt.text = "Created : ${room.createdAt.formatDateString()}"
+        }
+        else {
+            holder.binding.createdAt.text = ""
         }
 
         holder.binding.id.text = "ID ${room?.id}"

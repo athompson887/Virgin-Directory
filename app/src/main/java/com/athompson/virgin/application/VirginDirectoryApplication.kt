@@ -29,6 +29,11 @@ class VirginDirectoryApplication : Application() {
             ))
         }
     }
+
+    fun test():String{
+        return "Test works"
+    }
+
     companion object: KoinComponent {
         val preferences : Preferences by inject()
         fun getBaseUrl(): String {

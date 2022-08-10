@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -12,12 +13,16 @@ import java.util.*
 fun String.formatDateString():String
 {
     var res = ""
-    val formatter = SimpleDateFormat("yyyy-MM-dd")
-    val date: Date? = formatter.parse(this)
-    if(date!=null) {
-        val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        val formattedDate = dateFormatter.format(date)
-        res = formattedDate
+    try {
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val date: Date? = formatter.parse(this)
+        if (date != null) {
+            val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val formattedDate = dateFormatter.format(date)
+            res = formattedDate
+        }
+    } catch (exception:Exception) {
+        res = "";
     }
     return res
 }

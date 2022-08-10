@@ -6,9 +6,7 @@ import com.athompson.virgin.data.Person
 import com.athompson.virgin.repository.PeopleRepository
 
 
-class PersonViewModel(
-    private val peopleRepository: PeopleRepository
-) : ViewModel() {
+class PersonDetailViewModel() : ViewModel() {
 
     val selectedPerson: MutableLiveData<Person> by lazy {
         MutableLiveData<Person>()

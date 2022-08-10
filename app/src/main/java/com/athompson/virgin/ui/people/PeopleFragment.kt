@@ -16,7 +16,7 @@ import com.athompson.virgin.networking.Resource
 import com.athompson.virgin.networking.Status
 import com.athompson.virgin.setLayoutManagerVertical
 import com.athompson.virgin.showVerticalDividers
-import com.athompson.virgin.ui.people.detail.PersonViewModel
+import com.athompson.virgin.ui.people.detail.PersonDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 
@@ -50,11 +50,14 @@ class PeopleFragment : Fragment(),KoinComponent {
 
     private fun initialiseUIElements() {
         _adapter = PeopleAdapter {
-            val personDetailViewModel: PersonViewModel by viewModel()
+            val personDetailViewModel: PersonDetailViewModel by viewModel()
             personDetailViewModel.selectedPerson.postValue(it)
+
             val action =
                 PeopleFragmentDirections.actionNavigationPeopleToPersonDetailFragment()
+
             findNavController().navigate(action)
+
         }
         binding.recycler.setLayoutManagerVertical()
         binding.recycler.showVerticalDividers()

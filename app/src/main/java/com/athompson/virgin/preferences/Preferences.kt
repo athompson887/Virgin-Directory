@@ -20,6 +20,9 @@ class Preferences(context: Context) {
     fun setTestMode(testMode: Boolean) {
         preferences.edit().putBoolean(testModeKey, testMode).apply()
     }
+    fun getTestModeLive(): Boolean {
+        return preferences.getBoolean(testModeKey, false)
+    }
     fun getTestMode(): Boolean {
         return preferences.getBoolean(testModeKey, false)
     }

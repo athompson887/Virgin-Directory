@@ -66,6 +66,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@String/content_description_book_button"
         android:layout_height="wrap_content"
-        android:text="Show" />
+        android:text="BOOK" />
 </androidx.constraintlayout.widget.ConstraintLayout>

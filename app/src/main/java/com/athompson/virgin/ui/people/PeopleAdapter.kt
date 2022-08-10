@@ -39,7 +39,7 @@ class PeopleAdapter(
             .placeholder(R.drawable.ic_baseline_person_24)
             .into(holder.binding.avatarView)
 
-        holder.binding.fullName.text = "${data[position]?.firstName} {${data[position]?.lastName}"
+        holder.binding.fullName.text = "${data[position]?.firstName} ${data[position]?.lastName}"
         holder.binding.jobTitle.text = "${data[position]?.jobtitle}"
         holder.binding.email.text = "${data[position]?.email}"
     }

@@ -12,4 +12,5 @@
     <string name="live_mode">Live Mode</string>
     <string name="content_description_live_switch">A switch for showing live mode an test mode</string>
     <string name="content_description_logo">The Virgin Money Logo</string>
+    <string name="content_description_book_button">Book a room button</string>
 </resources>
